@@ -1,25 +1,29 @@
-package ru.otus.m1l5.homework.easy
+package homework.easy
 
+import kotlinx.coroutines.*
 import kotlin.test.Test
 
 class HWEasy {
 
     @Test
     fun easyHw() {
-        val numbers = generateNumbers()
-        val toFind = 10
-        val toFindOther = 1000
+        runBlocking {
 
-        val foundNumbers = listOf(
-            findNumberInList(toFind, numbers),
-            findNumberInList(toFindOther, numbers)
-        )
+            val numbers = generateNumbers()
+            val toFind = 10
+            val toFindOther = 1000
 
-        foundNumbers.forEach {
-            if (it != -1) {
-                println("Your number $it found!")
-            } else {
-                println("Not found number $toFind || $toFindOther")
+            val foundNumbers = listOf(
+                async { findNumberInList(toFind, numbers) },
+                async { findNumberInList(toFindOther, numbers) }
+            )
+
+            foundNumbers.forEach {
+                if (it.await() != -1) {
+                    println("Your number $it found!")
+                } else {
+                    println("Not found number $toFind || $toFindOther")
+                }
             }
         }
     }
