@@ -1,5 +1,7 @@
 @file:Suppress("unused")
 
+package ru.otus.otuskotlin.marketplace.m1l4
+
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
