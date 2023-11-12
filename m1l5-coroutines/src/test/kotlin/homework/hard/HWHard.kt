@@ -1,6 +1,9 @@
-package ru.otus.m1l5.homework.hard
+package ru.otus.otuskotlin.marketplace.m1l5.homework.hard
 
+import kotlinx.coroutines.*
+import ru.otus.otuskotlin.marketplace.m1l5.homework.hard.dto.Dictionary
 import java.io.File
+import java.math.BigInteger
 import kotlin.test.Test
 
 class HWHard {
@@ -30,17 +33,37 @@ class HWHard {
         dictionaryApi: DictionaryApi,
         words: Set<String>,
         @Suppress("SameParameterValue") locale: Locale
-    ) =
+    ): List<Dictionary?> {
         // make some suspensions and async
-        words.map {
-            dictionaryApi.findWord(locale, it)
+        var value = 0
+       return runBlocking(Dispatchers.Default) {
+            val result: MutableList<Dictionary?> = mutableListOf()
+            val newWords = words.toMutableList()
+            launch {
+                repeat(newWords.size) {
+                    launch {
+                        println("Start${newWords[it]} launch $it  ")
+                        //delay(1000L)
+                        value++
+
+                        result.add(dictionaryApi.findWord(locale, newWords[it]))
+                    }
+                    print("Finish[$it] ")
+                }
+
+            }.join()
+
+            return@runBlocking result
         }
 
-    object FileReader {
-        fun readFile(): String =
-            File(
-                this::class.java.classLoader.getResource("words.txt")?.toURI()
-                    ?: throw RuntimeException("Can't read file")
-            ).readText()
     }
+
+
+object FileReader {
+    fun readFile(): String =
+        File(
+            this::class.java.classLoader.getResource("words.txt")?.toURI()
+                ?: throw RuntimeException("Can't read file")
+        ).readText()
+}
 }

@@ -1,4 +1,4 @@
-package ru.otus.m1l5.homework.hard
+package ru.otus.otuskotlin.marketplace.m1l5.homework.hard
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
