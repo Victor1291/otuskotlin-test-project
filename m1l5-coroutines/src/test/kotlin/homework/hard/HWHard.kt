@@ -42,17 +42,13 @@ class HWHard {
             launch {
                 repeat(newWords.size) {
                     launch {
-                        println("Start${newWords[it]} launch $it  ")
-                        //delay(1000L)
+                        println("Start find '${newWords[it]}' - launch $it  ")
                         value++
-
                         result.add(dictionaryApi.findWord(locale, newWords[it]))
+                        //println("Finish[$it] ")
                     }
-                    print("Finish[$it] ")
                 }
-
             }.join()
-
             return@runBlocking result
         }
 
