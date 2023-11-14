@@ -3,10 +3,20 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-}
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+    plugins {
+        val kotlinVersion: String by settings
+
+        kotlin("jvm") version kotlinVersion
+    }
+
+
 }
 
 rootProject.name = "otuskotlin-test-project"
+
+include("m1l1-first-app")
+include("m1l2-basic")
+include("m1l3-oop")
+include("m1l4-dsl")
+include("m1l5-coroutines")
