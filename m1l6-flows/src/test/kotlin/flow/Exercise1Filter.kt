@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.m1l6.flow
 
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import java.math.BigDecimal
@@ -25,10 +26,11 @@ class Exercise1Filter {
         )
         val res = LIST
             .asFlow()
-            .run { flt.title?.let { t -> this.filter { it.title == t } } ?: this }
+            .run { flt.title?.let { t -> this.filter { it.title == t && it.id == "5"} } ?: this }
+            //.take(1)
             .toList()
-//        assertEquals(1, res.size)
-//        assertEquals("5", res.first().id)
+        assertEquals(1, res.size)
+        assertEquals("5", res.first().id)
     }
 
     companion object {
