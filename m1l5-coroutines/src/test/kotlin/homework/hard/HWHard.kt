@@ -14,6 +14,7 @@ class HWHard {
         //val dictionaries = findWords(dictionaryApi, words, Locale.EN)
         //val dictionaries = findWords2(dictionaryApi, words, Locale.EN)
         val dictionaries = findWords3(dictionaryApi, words, Locale.EN)
+      //  val dictionaries = findWords4(dictionaryApi, words, Locale.EN) не дожидается результата в СoroutineScope , применить флоу
 
         dictionaries.filterNotNull().map { dictionary ->
             print("For word ${dictionary.word} i found examples: ")
@@ -103,6 +104,33 @@ class HWHard {
             }
             return@runBlocking list.toList()
         }
+    }
+
+    private fun findWords4(
+        dictionaryApi: DictionaryApi,
+        words: Set<String>,
+        @Suppress("SameParameterValue") locale: Locale
+    ): List<Dictionary?> {
+        // make some suspensions and async
+        val scope = CoroutineScope(Job() + Dispatchers.IO)
+        var list: List<Dictionary?> = mutableListOf()
+      val job = scope.launch {
+            val result: MutableList<Deferred<Dictionary?>> = mutableListOf()
+
+            val newWords = words.toMutableList()
+            repeat(newWords.size) {
+                println("Start find '${newWords[it]}' - launch $it  ")
+                val new = async { dictionaryApi.findWord(locale, newWords[it]) }
+                result.add(new)
+                //println("Finish[$it] ")
+            }
+            list = result.map {
+                it.await()
+            }
+           joinAll()
+            cancel()
+        }
+        return  list.toList()
     }
 
     object FileReader {
