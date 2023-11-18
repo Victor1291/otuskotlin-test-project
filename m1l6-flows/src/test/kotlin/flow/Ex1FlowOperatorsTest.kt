@@ -19,6 +19,12 @@ class Ex1FlowOperatorsTest {
             .collect { println("Result number $it") } // терминальный оператор
     }
 
+
+    fun <T> Flow<T>.simpleScan(count: Int): Flow<List<T?>> {
+        val items = List<T?>(count) { null }
+        return this.scan(items) { previous, value -> previous.drop(1) + value }
+    }
+
     /**
      * Хелпер-функция для печати текущего потока
      */
@@ -80,7 +86,10 @@ class Ex1FlowOperatorsTest {
             .onCompletion { println(" On completion") } // Запустится один раз только вконце
             .catch { println("Catch: ${it.message}") } // Запустится только при генерации исключения
             .onEach { print(" $it ") } // Генерируется для каждого сообщения
-            .collect { }
+            .simpleScan(5)
+            .collectLatest {(one,two,three,four,five) ->
+                print("($one,$two,$three,$four,$five)")
+            }
     }
 
 
