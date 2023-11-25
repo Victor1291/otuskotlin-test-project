@@ -1,5 +1,4 @@
-/*
-@file:OptIn(ExperimentalForeignApi::class)
+/*@file:OptIn(ExperimentalForeignApi::class)
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.toKString
 import libcurl.*
@@ -18,5 +17,4 @@ fun main() {
         }
         curl_easy_cleanup(curl)
     }
-}
-*/
+}*/

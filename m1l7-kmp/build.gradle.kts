@@ -2,6 +2,10 @@ plugins {
     kotlin("multiplatform")
 }
 
+repositories {
+    mavenCentral()
+}
+
 val coroutinesVersion: String by project
 val datetimeVersion: String by project
 
@@ -19,10 +23,22 @@ kotlin {
         }
     }
     js {
-        browser()
+        browser{
+          /*  testTask {
+                useKarma {
+                    // Выбираем браузеры, на которых будет тестироваться
+                    useChrome()
+                    useFirefox()
+                }
+                // Без этой настройки длительные тесты не отрабатывают
+                useMocha {
+                    timeout = "100s"
+                }
+            }*/
+        }
     }
 
-    linuxX64 {
+    /*linuxX64 {
 
     }
 
@@ -31,6 +47,30 @@ kotlin {
     }
     macosArm64 {
 
+    }*/
+
+    listOf(
+        linuxX64(),
+        //linuxArm64(),
+        macosArm64(),
+    ).forEach {
+        it.apply {
+            compilations.getByName("main") {
+                cinterops {
+                    // настраиваем cinterop в файле src/nativeInterop/cinterop/libcurl.def
+                    val libcurl by creating {
+                        includeDirs {
+                            allHeaders("/usr/include/x86_64-linux-gnu", "/usr/include")
+                        }
+                    }
+                }
+            }
+            binaries {
+                executable {
+                    entryPoint = "main"
+                }
+            }
+        }
     }
 
     sourceSets {
