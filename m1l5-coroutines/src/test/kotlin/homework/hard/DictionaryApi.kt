@@ -11,10 +11,10 @@ class DictionaryApi(
     private val objectMapper: ObjectMapper = jacksonObjectMapper()
 ) {
 
-    suspend fun findWord(locale: Locale, word: String): Dictionary? { // make something with context
+   suspend fun findWord(locale: Locale, word: String): Dictionary? { // make something with context
         val url = "$DICTIONARY_API/${locale.code}/$word"
         println("Searching $url")
-        yield()
+       yield()
         return getBody(HttpClient.get(url).execute())?.firstOrNull()
     }
 
