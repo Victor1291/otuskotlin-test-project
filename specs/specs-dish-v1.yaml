@@ -6,16 +6,16 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
-  servers:
-    - url: http://localhost:8080/v1
-  tags:
-    - name: dish
-      description: Блюдо из меню
-  paths:
-    /dish/create:
-      post:
-        tags:
-          - dish
+servers:
+  - url: http://localhost:8080/v1
+tags:
+  - name: dish
+    description: Блюдо из меню
+paths:
+  /dish/create:
+    post:
+      tags:
+        - dish
       summary: Create dish
       operationId: dishCreate
       requestBody:
@@ -24,18 +24,18 @@ info:
           application/json:
             schema:
               $ref: '#/components/schemas/DishCreateRequest'
-            required: true
-            responses:
-              200:
-                description: Success
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/DishCreateResponse'
-    /dish/read:
-      post:
-        tags:
-          - dish
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishCreateResponse'
+  /dish/read:
+    post:
+      tags:
+        - dish
       summary: Read dish
       operationId: dishRead
       requestBody:
@@ -44,18 +44,18 @@ info:
           application/json:
             schema:
               $ref: '#/components/schemas/DishReadRequest'
-            required: true
-            responses:
-              200:
-                description: Success
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/DishReadResponse'
-    /dish/update:
-      post:
-        tags:
-          - dish
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishReadResponse'
+  /dish/update:
+    post:
+      tags:
+        - dish
       summary: Update dish
       operationId: dishUpdate
       requestBody:
@@ -64,18 +64,18 @@ info:
           application/json:
             schema:
               $ref: '#/components/schemas/DishUpdateRequest'
-            required: true
-            responses:
-              200:
-                description: Success
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/DishUpdateResponse'
-    /dish/delete:
-      post:
-        tags:
-          - dish
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishUpdateResponse'
+  /dish/delete:
+    post:
+      tags:
+        - dish
       summary: Delete dish
       operationId: dishDelete
       requestBody:
@@ -84,18 +84,18 @@ info:
           application/json:
             schema:
               $ref: '#/components/schemas/DishDeleteRequest'
-            required: true
-            responses:
-              200:
-                description: Success
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/DishDeleteResponse'
-    /dish/search:
-      post:
-        tags:
-          - dish
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishDeleteResponse'
+  /dish/search:
+    post:
+      tags:
+        - dish
       summary: Search dish
       operationId: dishSearch
       requestBody:
@@ -104,18 +104,18 @@ info:
           application/json:
             schema:
               $ref: '#/components/schemas/DishSearchRequest'
-            required: true
-            responses:
-              200:
-                description: Success
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/DishSearchResponse'
-    /dish/offers:
-      post:
-        tags:
-          - dish
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishSearchResponse'
+  /dish/offers:
+    post:
+      tags:
+        - dish
       summary: Search offers
       operationId: dishOffers
       requestBody:
@@ -124,14 +124,14 @@ info:
           application/json:
             schema:
               $ref: '#/components/schemas/DishOffersRequest'
-            required: true
-            responses:
-              200:
-                description: Success
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/DishOffersResponse'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishOffersResponse'
 components:
   schemas:
 
@@ -219,15 +219,20 @@ components:
       properties:
         title:
           type: string
-          description: Заголовок объявления
+          description: Название блюда
         description:
           type: string
           description: Описание блюда
         price:
-          type: integer
-          format: int32
-          example: 7
+          type: string
           description: Стоимость блюда
+        image:
+          type: string
+          description: фото блюда
+        typeDish:
+          type: string
+          description: тип блюда
+
         visibility:
           $ref: '#/components/schemas/DishVisibility'
 
@@ -314,7 +319,7 @@ components:
       properties:
         searchString:
           type: string
-          description: Поисковая строка, которая будет искаться в объявлениях
+          description: Поисковая строка, которая будет искаться в названиях и описаниях блюда
 
     DishSearchRequest:
       allOf:
@@ -357,19 +362,18 @@ components:
 
     DishPermissions:
       type: string
-      description: Доступы для клиента для операций над объявлением
+      description: Доступы для владельца для операций над объявлением
       enum:
         - read
         - update
         - delete
         - makeVisiblePublic
         - makeVisibleOwn
-        - makeVisibleGroup
 
     DishResponseSingle:
       allOf:
         - type: object
-          description: Ответ с одним объектом объявления
+          description: Ответ с одним объектом блюда
           properties:
             dish:
               $ref: '#/components/schemas/DishResponseObject'
@@ -377,7 +381,7 @@ components:
     DishResponseMulti:
       allOf:
         - type: object
-          description: Список найденных объектов
+          description: Список найденных блюд
           properties:
             dishes:
               type: array
@@ -446,6 +450,8 @@ components:
         - badId
         - badTitle
         - badDescription
+        - badImage
+        - badTypeDish
         - badVisibility
         - cannotDelete
         - badSearchString
