@@ -33,8 +33,8 @@ rootProject.name = "otuskotlin-test-project"
 //include("m1l6-flows")
 //include("m1l7-kmp")
 
-include("ok-menu-api-v1-jackson")
+//include("ok-menu-api-v1-jackson")
 include("ok-menu-api-v2-kmp")
 include("ok-menu-common")
-include("ok-mn-common")
-include("ok-menu-mappers-v1")
+//include("ok-menu-mappers-v1")
+include("ok-menu-mappers-v2")
