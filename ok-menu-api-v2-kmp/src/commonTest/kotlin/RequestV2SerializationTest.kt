@@ -1,12 +1,13 @@
-package ru.otus.otuskotlin.marketplace.api.v1
+package ru.otus.otuskotlin.marketplace.api.v2
 
-import ru.otus.otuskotlin.api.v1.models.*
+import kotlinx.serialization.encodeToString
+import ru.otus.otuskotlin.api.v2.models.*
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 
-class RequestV1SerializationTest {
-    private val request = DishCreateRequest(
+class RequestV2SerializationTest {
+    private val request: IRequest = DishCreateRequest(
         requestId = "123",
         debug = DishDebug(
             mode = DishRequestDebugMode.STUB,
@@ -18,13 +19,14 @@ class RequestV1SerializationTest {
             price = "10$",
             visibility = DishVisibility.PUBLIC,
             image = "picture",
-            typeDish = "first dish",
         )
     )
 
     @Test
     fun serialize() {
-        val json = apiV1Mapper.writeValueAsString(request)
+        val json = apiV2Mapper.encodeToString(IRequest.serializer(), request)
+
+        println(json)
 
         assertContains(json, Regex("\"title\":\\s*\"dish title\""))
         assertContains(json, Regex("\"mode\":\\s*\"stub\""))
@@ -34,18 +36,17 @@ class RequestV1SerializationTest {
 
     @Test
     fun deserialize() {
-        val json = apiV1Mapper.writeValueAsString(request)
-        val obj = apiV1Mapper.readValue(json, IRequest::class.java) as DishCreateRequest
+        val json = apiV2Mapper.encodeToString(request)
+        val obj = apiV2Mapper.decodeFromString(json) as DishCreateRequest
 
         assertEquals(request, obj)
     }
-
     @Test
     fun deserializeNaked() {
         val jsonString = """
             {"requestId": "123"}
         """.trimIndent()
-        val obj = apiV1Mapper.readValue(jsonString, DishCreateRequest::class.java)
+        val obj = apiV2Mapper.decodeFromString<DishCreateRequest>(jsonString)
 
         assertEquals("123", obj.requestId)
     }
