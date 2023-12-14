@@ -1,4 +1,7 @@
 package models
+
+import ru.otus.otuskotlin.models.*
+
 /**
  *
  *
@@ -23,7 +26,14 @@ data class MnDish (
     var description: String = "",
     var price: String = "",
     var image: String = "",
-    var visibility: DishVisibility? = MnDishVisibility.NONE,
-    var lock: MnDIshLock = MnDishLock.NONE,
-    val permissions: Set<MnDishPermissions>? = mutableSetOf()
-)
+    var visibility: MnDishVisibility = MnDishVisibility.NONE,
+    var lock: MnDishLock = MnDishLock.NONE,
+    val permissions: Set<MnDishPermissionsClient>? = mutableSetOf()
+) {
+
+    fun isEmpty() = this == NONE
+    companion object {
+        private val NONE = MnDish()
+    }
+
+}

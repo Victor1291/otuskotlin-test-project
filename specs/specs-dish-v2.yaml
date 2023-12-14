@@ -370,7 +370,7 @@ components:
         - update
         - delete
         - makeVisiblePublic
-        - makeVisibleOwn
+        - makeVisibleOwner
 
     DishResponseSingle:
       allOf:
