@@ -18,7 +18,6 @@ class RequestV1SerializationTest {
             price = "10$",
             visibility = DishVisibility.PUBLIC,
             image = "picture",
-            typeDish = "first dish",
         )
     )
 

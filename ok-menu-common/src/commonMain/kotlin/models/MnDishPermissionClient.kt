@@ -1,6 +1,6 @@
 package ru.otus.otuskotlin.models
 
-enum class MnDishPermissionsClient {
+enum class MnDishPermissionClient {
     READ,
     UPDATE,
     DELETE,

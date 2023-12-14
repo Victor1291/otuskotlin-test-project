@@ -235,7 +235,7 @@ components:
         visibility:
           $ref: '#/components/schemas/DishVisibility'
         productId:
-            $ref: '#/components/schemas/ProductId'
+          $ref: '#/components/schemas/ProductId'
 
 
     DishVisibility:
@@ -243,6 +243,7 @@ components:
       description: 'Тип видимости меню. Возможные значения: видит только владелец, видимо всем'
       enum:
         - ownerOnly
+        - registeredOnly
         - public
 
     DishInitResponse:
@@ -371,6 +372,7 @@ components:
         - delete
         - makeVisiblePublic
         - makeVisibleOwner
+        - makeVisibleGroup
 
     DishResponseSingle:
       allOf:

@@ -28,7 +28,7 @@ data class MnDish (
     var image: String = "",
     var visibility: MnDishVisibility = MnDishVisibility.NONE,
     var lock: MnDishLock = MnDishLock.NONE,
-    val permissions: Set<MnDishPermissionsClient>? = mutableSetOf()
+    val permissions: Set<MnDishPermissionClient>? = mutableSetOf()
 ) {
 
     fun isEmpty() = this == NONE
