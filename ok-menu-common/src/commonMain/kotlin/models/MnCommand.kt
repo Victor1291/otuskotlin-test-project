@@ -7,5 +7,4 @@ enum class MnCommand {
     UPDATE,
     DELETE,
     SEARCH,
-    OFFERS,
 }

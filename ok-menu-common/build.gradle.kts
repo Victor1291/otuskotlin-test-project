@@ -10,6 +10,8 @@ kotlin {
     macosX64 {}
     linuxX64 {}
 
+
+//    buildConfigField ('String', "BASE_PATH", "$version")
     sourceSets {
         val datetimeVersion: String by project
 

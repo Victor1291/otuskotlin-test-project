@@ -12,7 +12,6 @@ fun MnContext.toTransportDish(): IResponse = when (val cmd = command) {
     MnCommand.UPDATE -> toTransportUpdate()
     MnCommand.DELETE -> toTransportDelete()
     MnCommand.SEARCH -> toTransportSearch()
-    MnCommand.OFFERS -> toTransportOffers()
     MnCommand.NONE -> throw UnknownMnCommand(cmd)
 }
 
@@ -45,13 +44,6 @@ fun MnContext.toTransportDelete() = DishDeleteResponse(
 )
 
 fun MnContext.toTransportSearch() = DishSearchResponse(
-    requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == MnState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
-    errors = errors.toTransportErrors(),
-    dishes = dishesResponse.toTransportDish()
-)
-
-fun MnContext.toTransportOffers() = DishOffersResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
     result = if (state == MnState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
     errors = errors.toTransportErrors(),

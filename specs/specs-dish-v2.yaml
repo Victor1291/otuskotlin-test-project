@@ -112,26 +112,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DishSearchResponse'
-  /dish/offers:
-    post:
-      tags:
-        - dish
-      summary: Search offers
-      operationId: dishOffers
-      requestBody:
-        description: Request body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DishOffersRequest'
-        required: true
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DishOffersResponse'
+
 components:
   schemas:
 
@@ -154,7 +135,6 @@ components:
           update: '#/components/schemas/DishUpdateRequest'
           delete: '#/components/schemas/DishDeleteRequest'
           search: '#/components/schemas/DishSearchRequest'
-          offers: '#/components/schemas/DishOffersRequest'
 
     Error:
       type: object
@@ -200,7 +180,6 @@ components:
           update: '#/components/schemas/DishUpdateResponse'
           delete: '#/components/schemas/DishDeleteResponse'
           search: '#/components/schemas/DishSearchResponse'
-          offers: '#/components/schemas/DishOffersResponse'
           init: '#/components/schemas/DishInitResponse'
 
     UserId:
@@ -333,18 +312,6 @@ components:
             DishFilter:
               $ref: '#/components/schemas/DishSearchFilter'
 
-    DishOffersObject:
-      $ref: '#/components/schemas/DishReadObject'
-
-    DishOffersRequest:
-      allOf:
-        - $ref: '#/components/schemas/IRequest'
-        - $ref: '#/components/schemas/DishRequestDebug'
-        - type: object
-          properties:
-            dish:
-              $ref: '#/components/schemas/DishOffersObject'
-
     DishResponseObject:
       allOf:
         - $ref: '#/components/schemas/BaseDish'
@@ -417,11 +384,7 @@ components:
         - $ref: '#/components/schemas/IResponse'
         - $ref: '#/components/schemas/DishResponseMulti'
 
-    DishOffersResponse:
-      allOf:
-        - $ref: '#/components/schemas/IResponse'
-        - $ref: '#/components/schemas/DishResponseSingle'
-        - $ref: '#/components/schemas/DishResponseMulti'
+
 
     # STUBS ======================
     DishRequestDebugMode:
