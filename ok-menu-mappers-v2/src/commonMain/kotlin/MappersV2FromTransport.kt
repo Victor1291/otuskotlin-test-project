@@ -14,7 +14,6 @@ fun MnContext.fromTransport(request: IRequest) = when (request) {
     is DishUpdateRequest -> fromTransport(request)
     is DishDeleteRequest -> fromTransport(request)
     is DishSearchRequest -> fromTransport(request)
-    is DishOffersRequest -> fromTransport(request)
     else -> throw UnknownRequestClass(request)
 }
 
@@ -80,14 +79,6 @@ fun MnContext.fromTransport(request: DishSearchRequest) {
     command = MnCommand.SEARCH
     requestId = request.requestId()
     dishFilterRequest = request.dishFilter.toInternal()
-    workMode = request.debug.transportToWorkMode()
-    stubCase = request.debug.transportToStubCase()
-}
-
-fun MnContext.fromTransport(request: DishOffersRequest) {
-    command = MnCommand.OFFERS
-    requestId = request.requestId()
-    dishRequest = request.dish?.id.toDishWithId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
