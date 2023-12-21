@@ -10,9 +10,12 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ok-menu-api-v1-jackson" />
             <option value="$PROJECT_DIR$/ok-menu-api-v2-kmp" />
+            <option value="$PROJECT_DIR$/ok-menu-app-spring" />
+            <option value="$PROJECT_DIR$/ok-menu-biz" />
             <option value="$PROJECT_DIR$/ok-menu-common" />
             <option value="$PROJECT_DIR$/ok-menu-mappers-v1" />
             <option value="$PROJECT_DIR$/ok-menu-mappers-v2" />
+            <option value="$PROJECT_DIR$/ok-menu-stubs" />
           </set>
         </option>
       </GradleProjectSettings>

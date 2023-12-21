@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.0.1
 info:
   title: "Menu ${VERSION_APP}"
   description: This is a place where visitors choose dishes from the menu
