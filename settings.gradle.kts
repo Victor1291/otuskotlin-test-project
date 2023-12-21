@@ -7,6 +7,7 @@ pluginManagement {
     val cwpGeneratorVersioin: String by settings
     val springframeworkBootVersion: String by settings
     val springDependencyManagementVersion: String by settings
+    val ktorVersion: String by settings
 
 
     repositories {
@@ -23,6 +24,7 @@ pluginManagement {
         id("io.spring.dependency-management") version springDependencyManagementVersion apply false
         kotlin("plugin.spring") version kotlinVersion apply false
 
+        id("io.ktor.plugin") version ktorVersion apply false
 
         id("io.kotest.multiplatform") version kotestVersion apply false
         id("org.openapi.generator") version openapiVersion apply false
@@ -56,4 +58,6 @@ include("ok-menu-common")
 include("ok-menu-biz")
 
 include("ok-menu-app-spring")
+include("ok-menu-app-ktor")
+
 
