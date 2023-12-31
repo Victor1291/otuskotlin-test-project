@@ -8,7 +8,7 @@ import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2Mapper
-import ru.otus.otuskotlin.marketplace.app.ktor.v2.v2Ad
+import ru.otus.otuskotlin.marketplace.app.ktor.v2.v2Dish
 import ru.otus.otuskotlin.marketplace.biz.MbizDishProcessor
 
 fun main(args: Array<String>) = io.ktor.server.cio.EngineMain.main(args)
@@ -27,13 +27,13 @@ fun Application.module(processor: MbizDishProcessor = MbizDishProcessor()) {
 
     routing {
         get("/") {
-            call.respondText("Hello, world!")
+            call.respondText("Hello, Victor!")
         }
         route("v2") {
             install(ContentNegotiation) {
                 json(apiV2Mapper)
             }
-            v2Ad(processor)
+            v2Dish(processor)
         }
     }
 }

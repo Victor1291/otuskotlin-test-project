@@ -15,3 +15,11 @@ ktor:
 #    - "http://127.0.0.1:8080/v1"
 #    - "http://0.0.0.0:8080/v1"
 #    - "http://192.168.0.182:8080/v1"
+
+    swagger-ui:
+      use-root-path: true
+      urls:
+        - name: v1
+          url: specs-dish-v1.yaml
+        - name: v2
+          url: specs-dish-v2.yaml

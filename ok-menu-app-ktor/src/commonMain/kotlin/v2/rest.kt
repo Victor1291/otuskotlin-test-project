@@ -4,7 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import ru.otus.otuskotlin.marketplace.biz.MbizDishProcessor
 
-fun Route.v2Ad(processor: MbizDishProcessor) {
+fun Route.v2Dish(processor: MbizDishProcessor) {
     route("dish") {
         post("create") {
             call.createDish(processor)

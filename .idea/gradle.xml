@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ok-menu-api-v1-jackson" />
             <option value="$PROJECT_DIR$/ok-menu-api-v2-kmp" />
+            <option value="$PROJECT_DIR$/ok-menu-app-ktor" />
             <option value="$PROJECT_DIR$/ok-menu-app-spring" />
             <option value="$PROJECT_DIR$/ok-menu-biz" />
             <option value="$PROJECT_DIR$/ok-menu-common" />
