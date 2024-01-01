@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.markeplace.springapp.api.v1.controller
+package ru.otus.otuskotlin.springapp.api.v1.controller
 
 import org.springframework.web.bind.annotation.*
 import ru.otus.otuskotlin.MnContext

@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.markeplace.springapp.api.v1.controller
+package ru.otus.otuskotlin.springapp.api.v2.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
@@ -11,52 +11,49 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 import ru.otus.otuskotlin.MnContext
-import ru.otus.otuskotlin.api.v1.models.*
+import ru.otus.otuskotlin.api.v2.models.*
 import ru.otus.otuskotlin.marketplace.biz.MbizDishProcessor
-import ru.otuskotlin.test.mappers.v1.*
+import ru.otuskotlin.test.mappers.v2.*
 
-@WebFluxTest(DishControllerV1::class)
-internal class DishControllerV1Test {
+@WebFluxTest(DishControllerV2::class)
+internal class DishControllerV2Test {
     @Autowired
     private lateinit var webClient: WebTestClient
 
     @MockkBean(relaxUnitFun = true)
     private lateinit var processor: MbizDishProcessor
 
-    @Autowired
-    private lateinit var mapper: ObjectMapper
-
     @Test
     fun createDish() = testStubDish(
-        "/v1/dish/create",
+        "/v2/dish/create",
         DishCreateRequest(),
         MnContext().toTransportCreate()
     )
 
     @Test
     fun readAd() = testStubDish(
-        "/v1/dish/read",
+        "/v2/dish/read",
         DishReadRequest(),
         MnContext().toTransportRead()
     )
 
     @Test
     fun updateAd() = testStubDish(
-        "/v1/dish/update",
+        "/v2/dish/update",
         DishUpdateRequest(),
         MnContext().toTransportUpdate()
     )
 
     @Test
     fun deleteAd() = testStubDish(
-        "/v1/dish/delete",
+        "/v2/dish/delete",
         DishDeleteRequest(),
         MnContext().toTransportDelete()
     )
 
     @Test
     fun searchAd() = testStubDish(
-        "/v1/dish/search",
+        "/v2/dish/search",
         DishSearchRequest(),
         MnContext().toTransportSearch()
     )
@@ -76,7 +73,8 @@ internal class DishControllerV1Test {
             .expectBody(Res::class.java)
             .value {
                 println("RESPONSE: $it")
-                val expectedResponse =  mapper.readValue(mapper.writeValueAsString(responseObj as IResponse), IResponse::class.java)
+                val expectedResponse : IResponse = responseObj as IResponse
+//                val expectedResponse =  mapper.readValue(mapper.writeValueAsString(responseObj as IResponse), IResponse::class.java)
                 Assertions.assertThat(it).isEqualTo(expectedResponse)
             }
         coVerify { processor.exec(any()) }

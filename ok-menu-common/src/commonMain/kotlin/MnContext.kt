@@ -4,6 +4,7 @@ import kotlinx.datetime.Instant
 import models.MnDish
 import ru.otus.otuskotlin.models.*
 import ru.otus.otuskotlin.stubs.MnStubs
+import ru.otus.otuskotlin.ws.IMnWsSession
 
 data class MnContext(
     var command: MnCommand = MnCommand.NONE,
@@ -19,4 +20,7 @@ data class MnContext(
     var dishFilterRequest: MnDishFilter = MnDishFilter(),
     var dishResponse: MnDish = MnDish(),
     var dishesResponse: MutableList<MnDish> = mutableListOf(),
+
+    //ws
+    var session: IMnWsSession = IMnWsSession.NONE
 )

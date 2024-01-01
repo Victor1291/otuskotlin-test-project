@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.markeplace.springapp.config
+package ru.otus.otuskotlin.springapp.config
 
 import kotlinx.serialization.json.Json
 import org.springframework.context.annotation.Bean

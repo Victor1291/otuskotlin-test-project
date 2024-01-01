@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.marketplace.api.v2
 
 import kotlinx.serialization.encodeToString
+import ru.otus.otuskotlin.api.v2.apiV2Mapper
 import ru.otus.otuskotlin.api.v2.models.*
 import kotlin.test.Test
 import kotlin.test.assertContains
