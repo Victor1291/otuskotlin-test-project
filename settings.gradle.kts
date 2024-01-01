@@ -7,6 +7,8 @@ pluginManagement {
     val cwpGeneratorVersioin: String by settings
     val springframeworkBootVersion: String by settings
     val springDependencyManagementVersion: String by settings
+    //spring
+    val pluginJpa: String by settings
 
 
     repositories {
@@ -22,7 +24,8 @@ pluginManagement {
         id("org.springframework.boot") version springframeworkBootVersion apply false
         id("io.spring.dependency-management") version springDependencyManagementVersion apply false
         kotlin("plugin.spring") version kotlinVersion apply false
-
+//spring
+        kotlin("plugin.jpa") version pluginJpa apply false
 
         id("io.kotest.multiplatform") version kotestVersion apply false
         id("org.openapi.generator") version openapiVersion apply false
@@ -42,6 +45,8 @@ pluginManagement {
 //include("m1l5-coroutines")
 //include("m1l6-flows")
 //include("m1l7-kmp")
+
+include("m3l1-spring")
 
 include("ok-menu-api-v1-jackson")
 include("ok-menu-mappers-v1")
